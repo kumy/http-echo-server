@@ -1,0 +1,20 @@
+# Used by goreleaser only: the binary is pre-built by the release pipeline and
+# copied in. For standalone builds use ./Dockerfile (multi-stage).
+FROM gcr.io/distroless/static-debian12:nonroot
+
+LABEL org.opencontainers.image.title="http-echo-server" \
+      org.opencontainers.image.description="Echo HTTP/HTTPS request properties back to the client, with HTTP/2 and on-the-fly TLS" \
+      org.opencontainers.image.source="https://github.com/kumy/http-echo-server" \
+      org.opencontainers.image.licenses="MIT"
+
+COPY http-echo-server /usr/local/bin/http-echo-server
+
+VOLUME ["/certs"]
+ENV TLS_CA_CERT_FILE=/certs/ca.crt \
+    TLS_CA_KEY_FILE=/certs/ca.key
+
+EXPOSE 8080 8443
+
+USER nonroot
+
+ENTRYPOINT ["/usr/local/bin/http-echo-server"]

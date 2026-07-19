@@ -1,0 +1,28 @@
+# Binaries
+/bin/
+/dist/
+/http-echo-server
+*.exe
+
+# Test & coverage
+*.test
+coverage.out
+coverage.html
+
+# Docs build output (zensical)
+/site/
+.cache/
+
+# Generated certificates (auto-CA mode default output)
+/certs/
+
+# Editors / OS
+.idea/
+.vscode/
+*.swp
+.DS_Store
+
+# Tooling
+.serena/
+node_modules/
+.venv/
