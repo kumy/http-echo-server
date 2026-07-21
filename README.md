@@ -17,6 +17,7 @@ certs, an automatic on-the-fly CA, or [HashiCorp Vault](https://www.vaultproject
 
 📚 **Full documentation: <https://kumy.github.io/https-echo-server/>**
 📋 **Functional specification: [docs/specification.md](docs/specification.md)**
+🆚 **Everything added on top of mendhak's original: [docs/comparison.md](docs/comparison.md)**
 
 ## Features
 

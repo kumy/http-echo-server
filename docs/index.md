@@ -59,5 +59,7 @@ curl -k https://localhost:8443/hello?foo=bar
 - [Configuration](configuration.md) — every flag / env var / config key
 - [TLS](tls.md) — the three TLS modes in depth, including Vault setup
 - [Usage & endpoints](usage.md) — echo format, response shaping, metrics
+- [Compared to mendhak](comparison.md) — everything added on top of the
+  original project
 - [Specification](specification.md) — the formal functional spec
 - [Development](development.md) — building, CI/CD, release automation

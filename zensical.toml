@@ -16,6 +16,7 @@ nav = [
   { "Configuration" = "configuration.md" },
   { "TLS" = "tls.md" },
   { "Usage & endpoints" = "usage.md" },
+  { "Compared to mendhak" = "comparison.md" },
   { "Specification" = "specification.md" },
   { "Development" = "development.md" },
 ]
