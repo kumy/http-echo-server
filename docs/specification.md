@@ -127,8 +127,10 @@ Empty/inapplicable fields are omitted (`omitempty` semantics).
 
 Loopback, link-local, and RFC1918 ranges are always trusted;
 `ADDITIONAL_TRUSTED_PROXIES` (comma-separated IPs/CIDRs) extends the set.
-`ip` is the first untrusted address walking `X-Forwarded-For` right-to-left,
-falling back to the socket peer address.
+`ip` is the first untrusted address walking `X-Forwarded-For` right-to-left.
+When the peer is untrusted (or no `X-Forwarded-For` is present), the socket
+peer address is used; when every chain entry is trusted, the leftmost entry
+is used (Express/mendhak behaviour).
 
 ### 6.3 Response shaping
 
@@ -138,10 +140,12 @@ Header **or** query parameter, header wins on conflict:
 - `x-set-response-content-type` — verbatim into `Content-Type`.
 - `x-set-response-delay-ms` — non-negative int, capped at 120000 (2 min);
   the delay must not block other requests (sleep in handler goroutine) and
-  must abort early if the client disconnects.
+  must abort early if the client disconnects. Aborted requests are logged
+  and counted with status `499` (client closed request).
 - `response_body_only=true` — query param only (not honoured as a header,
-  matching mendhak): respond with the raw request body (status/content-type
-  shaping still applies).
+  matching mendhak): respond with the raw request body, capped at
+  `MAX_BODY_SIZE` like the echoed `body` field (status/content-type shaping
+  still applies).
 - Shaping parameters are always visible in the echoed `headers`/`query`.
 - Shaping is ignored in forwarding mode (§7): the remote response is
   authoritative.
@@ -155,15 +159,17 @@ Precedence for the body: `ECHO_BACK_TO_CLIENT=false` (empty) >
 Handled before echo and before forwarding, in this order:
 
 1. `PROMETHEUS_METRICS_PATH` (only if `PROMETHEUS_ENABLED`) → metrics.
-2. `TLS_CA_ENDPOINT` (only in `auto`/`vault` mode, non-empty) → CA PEM,
-   `Content-Type: application/x-pem-file`. Served on **both** listeners.
+2. `TLS_CA_ENDPOINT` (only in `auto`/`vault` mode with the TLS listener
+   enabled, non-empty) → CA PEM, `Content-Type: application/x-pem-file`.
+   Served on **both** listeners; with `HTTPS_ENABLED=false` no CA exists and
+   the path echoes like any other.
 
 ### 6.5 WebSocket echo
 
 If `WS_ENABLED=true` and the request is a WebSocket upgrade, upgrade instead
 of echoing. First message from server: the JSON echo of the upgrade request.
-Then every client message (text/binary) is echoed back unchanged. Close is
-mirrored. Works on both listeners (`ws://`, `wss://`), any path. WebSocket
+Then every client message (text/binary) is echoed back unchanged, with no
+message-size limit. Close is mirrored. Works on both listeners (`ws://`, `wss://`), any path. WebSocket
 upgrades are handled locally even in forwarding mode (§7) — WebSocket traffic
 is never forwarded.
 
@@ -195,10 +201,10 @@ components and expose the exact messages they exchange.
   `Proxy-Authorization`, `TE`, `Trailer`, `Transfer-Encoding`, `Upgrade`).
 - `Host` is rewritten to the target's host; `FORWARD_PRESERVE_HOST=true`
   keeps the client's original `Host` instead.
-- Standard proxy headers are added: the client IP is appended to
-  `X-Forwarded-For`; `X-Forwarded-Proto` is set to the original scheme and
-  `X-Forwarded-Host` to the original `Host` (both only if not already
-  present).
+- Standard proxy headers are added: the direct peer's IP is appended to the
+  (fully preserved) `X-Forwarded-For` chain; `X-Forwarded-Proto` is set to
+  the original scheme and `X-Forwarded-Host` to the original `Host` (both
+  only if not already present).
 - Transport: HTTP/1.1 to `http://` targets, ALPN (`h2` or `http/1.1`) to
   `https://` targets; system trust store, or none with
   `FORWARD_SKIP_VERIFY=true`. Transparent response decompression is
