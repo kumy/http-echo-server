@@ -3,7 +3,7 @@
 ## Docker
 
 ```shell
-docker run -p 8080:8080 -p 8443:8443 --rm -t ghcr.io/kumy/http-echo-server
+docker run -p 8080:8080 -p 8443:8443 --rm -t ghcr.io/kumy/https-echo-server
 ```
 
 Issue a request:
@@ -35,14 +35,14 @@ The response (and the container log) contains the echoed request:
 
 !!! tip "Pin a version"
     Prefer a specific tag over `:latest`, e.g.
-    `ghcr.io/kumy/http-echo-server:1.2.3`. Images are tagged with
+    `ghcr.io/kumy/https-echo-server:1.2.3`. Images are tagged with
     `MAJOR`, `MAJOR.MINOR`, and full version.
 
 ### Choose your ports
 
 ```shell
 docker run -e HTTP_PORT=8888 -e HTTPS_PORT=9999 -p 8888:8888 -p 9999:9999 \
-  --rm -t ghcr.io/kumy/http-echo-server
+  --rm -t ghcr.io/kumy/https-echo-server
 ```
 
 ### Drop `-k`: trust the auto-generated CA
@@ -52,7 +52,7 @@ prints it to the logs, and saves it (in the container: `/certs/ca.crt`). Mount
 a volume to grab and persist it:
 
 ```shell
-docker run -p 8443:8443 -v $PWD/certs:/certs --rm -t ghcr.io/kumy/http-echo-server
+docker run -p 8443:8443 -v $PWD/certs:/certs --rm -t ghcr.io/kumy/https-echo-server
 
 curl --cacert certs/ca.crt https://localhost:8443/
 ```
@@ -71,20 +71,20 @@ You can also download the CA over plain HTTP at `http://localhost:8080/ca`
 ## Binary
 
 Grab an archive for your OS/arch from the
-[releases page](https://github.com/kumy/http-echo-server/releases):
+[releases page](https://github.com/kumy/https-echo-server/releases):
 
 ```shell
-tar xzf http-echo-server_*_linux_amd64.tar.gz
-./http-echo-server
+tar xzf https-echo-server_*_linux_amd64.tar.gz
+./https-echo-server
 ```
 
 Or build from source (Go ≥ 1.25):
 
 ```shell
-git clone https://github.com/kumy/http-echo-server
-cd http-echo-server
+git clone https://github.com/kumy/https-echo-server
+cd https-echo-server
 make build
-./bin/http-echo-server
+./bin/https-echo-server
 ```
 
 ## HTTP/2
@@ -104,7 +104,7 @@ curl -s --http2-prior-knowledge http://localhost:8080/ | jq .httpVersion       #
 ```yaml
 services:
   echo:
-    image: ghcr.io/kumy/http-echo-server:1
+    image: ghcr.io/kumy/https-echo-server:1
     ports:
       - "8080:8080"
       - "8443:8443"

@@ -1,9 +1,9 @@
-# http-echo-server
+# https-echo-server
 
-[![CI](https://github.com/kumy/http-echo-server/actions/workflows/ci.yml/badge.svg)](https://github.com/kumy/http-echo-server/actions/workflows/ci.yml)
-[![Release](https://github.com/kumy/http-echo-server/actions/workflows/release.yml/badge.svg)](https://github.com/kumy/http-echo-server/actions/workflows/release.yml)
-[![Docs](https://github.com/kumy/http-echo-server/actions/workflows/docs.yml/badge.svg)](https://kumy.github.io/http-echo-server/)
-[![Go Report Card](https://goreportcard.com/badge/github.com/kumy/http-echo-server)](https://goreportcard.com/report/github.com/kumy/http-echo-server)
+[![CI](https://github.com/kumy/https-echo-server/actions/workflows/ci.yml/badge.svg)](https://github.com/kumy/https-echo-server/actions/workflows/ci.yml)
+[![Release](https://github.com/kumy/https-echo-server/actions/workflows/release.yml/badge.svg)](https://github.com/kumy/https-echo-server/actions/workflows/release.yml)
+[![Docs](https://github.com/kumy/https-echo-server/actions/workflows/docs.yml/badge.svg)](https://kumy.github.io/https-echo-server/)
+[![Go Report Card](https://goreportcard.com/badge/github.com/kumy/https-echo-server)](https://goreportcard.com/report/github.com/kumy/https-echo-server)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A small Go daemon that echoes HTTP request properties back to the client — in the
@@ -15,7 +15,7 @@ Inspired by [mendhak/docker-http-https-echo](https://github.com/mendhak/docker-h
 rewritten in Go with first-class **HTTP/2** and flexible **TLS** (bring your own
 certs, an automatic on-the-fly CA, or [HashiCorp Vault](https://www.vaultproject.io/) as PKI).
 
-📚 **Full documentation: <https://kumy.github.io/http-echo-server/>**
+📚 **Full documentation: <https://kumy.github.io/https-echo-server/>**
 📋 **Functional specification: [docs/specification.md](docs/specification.md)**
 
 ## Features
@@ -55,7 +55,7 @@ certs, an automatic on-the-fly CA, or [HashiCorp Vault](https://www.vaultproject
 ### Docker
 
 ```shell
-docker run -p 8080:8080 -p 8443:8443 --rm -t ghcr.io/kumy/http-echo-server
+docker run -p 8080:8080 -p 8443:8443 --rm -t ghcr.io/kumy/https-echo-server
 ```
 
 Issue a request:
@@ -94,7 +94,7 @@ In the default `auto` TLS mode the server prints its root CA at startup and
 saves it to `certs/ca.crt`. Any server name you request is signed on the fly:
 
 ```shell
-docker run -p 8443:8443 -v $PWD/certs:/certs --rm -t ghcr.io/kumy/http-echo-server
+docker run -p 8443:8443 -v $PWD/certs:/certs --rm -t ghcr.io/kumy/https-echo-server
 curl --cacert certs/ca.crt --resolve foo.example.com:8443:127.0.0.1 \
   https://foo.example.com:8443/
 ```
@@ -105,12 +105,12 @@ You can also fetch the CA over plain HTTP from `http://localhost:8080/ca`.
 ### Binary
 
 Download a release from the
-[releases page](https://github.com/kumy/http-echo-server/releases), or build
+[releases page](https://github.com/kumy/https-echo-server/releases), or build
 from source:
 
 ```shell
 make build
-./bin/http-echo-server
+./bin/https-echo-server
 ```
 
 ## Configuration overview
@@ -118,7 +118,7 @@ make build
 Everything is configurable through CLI flags, environment variables, or a
 config file (`--config config.yaml`); precedence is **flags > env > file >
 defaults**. See the
-[configuration reference](https://kumy.github.io/http-echo-server/configuration/)
+[configuration reference](https://kumy.github.io/https-echo-server/configuration/)
 for the full list. Highlights:
 
 | Environment variable | Default | Purpose |
@@ -164,24 +164,24 @@ curl https://localhost:8443/tea?x-set-response-status-code=418 -k -i
 
 ```shell
 # 1. static — bring your own pair
-TLS_MODE=static HTTPS_CERT_FILE=./fullchain.pem HTTPS_KEY_FILE=./privkey.pem http-echo-server
+TLS_MODE=static HTTPS_CERT_FILE=./fullchain.pem HTTPS_KEY_FILE=./privkey.pem https-echo-server
 
 # 2. auto (default) — root CA generated, printed, saved; leaf certs minted per SNI
-http-echo-server
+https-echo-server
 
 # 3. vault — leaf certs issued by a Vault PKI role per SNI
 TLS_MODE=vault VAULT_ADDR=https://vault:8200 VAULT_TOKEN=... \
-  VAULT_PKI_MOUNT=pki_int VAULT_PKI_ROLE=echo http-echo-server
+  VAULT_PKI_MOUNT=pki_int VAULT_PKI_ROLE=echo https-echo-server
 ```
 
 Details, browser-import instructions, and the Vault policy you need are in the
-[TLS guide](https://kumy.github.io/http-echo-server/tls/).
+[TLS guide](https://kumy.github.io/https-echo-server/tls/).
 
 ## Development
 
 ```shell
 make help          # list all targets
-make build         # build ./bin/http-echo-server
+make build         # build ./bin/https-echo-server
 make test          # go test -race with coverage
 make lint          # golangci-lint
 make docker-build  # multi-stage docker image

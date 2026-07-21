@@ -19,7 +19,7 @@ flowchart LR
 TLS_MODE=static \
 HTTPS_CERT_FILE=/etc/tls/fullchain.pem \
 HTTPS_KEY_FILE=/etc/tls/privkey.pem \
-http-echo-server
+https-echo-server
 ```
 
 - The certificate file may contain the full chain (leaf first).
@@ -34,7 +34,7 @@ docker run -p 8443:8443 --rm -t \
   -e TLS_MODE=static \
   -e HTTPS_CERT_FILE=/etc/tls/fullchain.pem \
   -e HTTPS_KEY_FILE=/etc/tls/privkey.pem \
-  ghcr.io/kumy/http-echo-server
+  ghcr.io/kumy/https-echo-server
 ```
 
 ## `auto` — on-the-fly CA (default)
@@ -42,7 +42,7 @@ docker run -p 8443:8443 --rm -t \
 On first start the server:
 
 1. Generates a root CA (ECDSA P-256, 10-year validity, CN
-   `http-echo-server Root CA`).
+   `https-echo-server Root CA`).
 2. **Prints the CA certificate PEM to stdout** (disable with
    `TLS_CA_PRINT=false`).
 3. Saves the CA to `TLS_CA_CERT_FILE` / `TLS_CA_KEY_FILE`
@@ -74,7 +74,7 @@ entries, `TLS_CERT_TTL` validity):
 === "Chrome / system (Linux)"
 
     ```shell
-    sudo cp certs/ca.crt /usr/local/share/ca-certificates/http-echo-server.crt
+    sudo cp certs/ca.crt /usr/local/share/ca-certificates/https-echo-server.crt
     sudo update-ca-certificates
     ```
 
@@ -112,7 +112,7 @@ VAULT_ADDR=https://vault.internal:8200 \
 VAULT_TOKEN=hvs.XXXX \
 VAULT_PKI_MOUNT=pki_int \
 VAULT_PKI_ROLE=echo \
-http-echo-server
+https-echo-server
 ```
 
 For each new SNI, the server calls

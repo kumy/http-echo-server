@@ -1,4 +1,4 @@
-# http-echo-server
+# https-echo-server
 
 A small Go daemon that echoes HTTP request properties back to the client — in
 the response body and in the logs. Useful for debugging proxies, load
@@ -36,7 +36,7 @@ rewritten in Go with first-class **HTTP/2** and flexible **TLS**.
 ## Quick taste
 
 ```shell
-docker run -p 8080:8080 -p 8443:8443 --rm -t ghcr.io/kumy/http-echo-server
+docker run -p 8080:8080 -p 8443:8443 --rm -t ghcr.io/kumy/https-echo-server
 curl -k https://localhost:8443/hello?foo=bar
 ```
 

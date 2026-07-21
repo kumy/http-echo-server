@@ -1,4 +1,4 @@
-module github.com/kumy/http-echo-server
+module github.com/kumy/https-echo-server
 
 go 1.25.0
 

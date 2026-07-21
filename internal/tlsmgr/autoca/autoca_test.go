@@ -16,7 +16,7 @@ func TestNewCA(t *testing.T) {
 	if !ca.cert.IsCA {
 		t.Error("certificate is not a CA")
 	}
-	if ca.cert.Subject.CommonName != "http-echo-server Root CA" {
+	if ca.cert.Subject.CommonName != "https-echo-server Root CA" {
 		t.Errorf("CN = %q", ca.cert.Subject.CommonName)
 	}
 	if validity := ca.cert.NotAfter.Sub(ca.cert.NotBefore); validity < 9*365*24*time.Hour {

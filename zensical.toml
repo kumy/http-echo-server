@@ -1,10 +1,10 @@
 [project]
-site_name = "http-echo-server"
+site_name = "https-echo-server"
 site_description = "A Go HTTP/HTTPS echo server with HTTP/2 and flexible TLS: static certs, on-the-fly CA, or Vault PKI."
 site_author = "Mathieu A. (kumy)"
-site_url = "https://kumy.github.io/http-echo-server/"
-repo_url = "https://github.com/kumy/http-echo-server"
-repo_name = "kumy/http-echo-server"
+site_url = "https://kumy.github.io/https-echo-server/"
+repo_url = "https://github.com/kumy/https-echo-server"
+repo_name = "kumy/https-echo-server"
 
 copyright = """
 Copyright &copy; 2026 Mathieu A. (kumy) — MIT License
@@ -53,7 +53,7 @@ toggle.name = "Switch to light mode"
 
 [[project.extra.social]]
 icon = "fontawesome/brands/github"
-link = "https://github.com/kumy/http-echo-server"
+link = "https://github.com/kumy/https-echo-server"
 
 [project.markdown_extensions.abbr]
 [project.markdown_extensions.admonition]

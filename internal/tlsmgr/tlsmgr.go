@@ -13,9 +13,9 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/kumy/http-echo-server/internal/config"
-	"github.com/kumy/http-echo-server/internal/tlsmgr/autoca"
-	"github.com/kumy/http-echo-server/internal/tlsmgr/vaultpki"
+	"github.com/kumy/https-echo-server/internal/config"
+	"github.com/kumy/https-echo-server/internal/tlsmgr/autoca"
+	"github.com/kumy/https-echo-server/internal/tlsmgr/vaultpki"
 )
 
 // Result is the assembled TLS material.

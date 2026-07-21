@@ -7,7 +7,7 @@ import (
 	"github.com/coder/websocket"
 	"go.uber.org/zap"
 
-	"github.com/kumy/http-echo-server/internal/echo"
+	"github.com/kumy/https-echo-server/internal/echo"
 )
 
 // handleWebSocket upgrades and echoes every message back (spec §6.5): the

@@ -137,7 +137,7 @@ output](usage.md#verbose-wire-dump). See
 ## Config file example
 
 ```yaml
-# config.yaml — start with: http-echo-server --config config.yaml
+# config.yaml — start with: https-echo-server --config config.yaml
 http-port: 8080
 https-port: 8443
 tls-mode: vault

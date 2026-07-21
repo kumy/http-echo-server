@@ -44,7 +44,7 @@ require a spec update in the same PR.
 ## 3. Package layout
 
 ```
-cmd/http-echo-server/      main: wire config → logger → servers, signal handling
+cmd/https-echo-server/      main: wire config → logger → servers, signal handling
 internal/version/          Version/Commit/Date vars injected via ldflags
 internal/config/           viper loading, validation, defaults; Config struct
 internal/logging/          zap construction from config
@@ -276,7 +276,7 @@ mode.
 ### 9.3 `auto`
 
 - CA: load `TLS_CA_CERT_FILE`/`TLS_CA_KEY_FILE` if both exist and parse;
-  otherwise generate ECDSA P-256, CN `http-echo-server Root CA`,
+  otherwise generate ECDSA P-256, CN `https-echo-server Root CA`,
   `IsCA`, validity 10 years, and persist (cert `0644`, key `0600`,
   directories created as needed). Persist failure → warn, continue in-memory.
 - Startup: print CA PEM to stdout if `TLS_CA_PRINT` (independent of log

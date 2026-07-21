@@ -12,11 +12,11 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/net/http/httpguts"
 
-	"github.com/kumy/http-echo-server/internal/config"
-	"github.com/kumy/http-echo-server/internal/echo"
-	"github.com/kumy/http-echo-server/internal/forward"
-	"github.com/kumy/http-echo-server/internal/metrics"
-	"github.com/kumy/http-echo-server/internal/verbose"
+	"github.com/kumy/https-echo-server/internal/config"
+	"github.com/kumy/https-echo-server/internal/echo"
+	"github.com/kumy/https-echo-server/internal/forward"
+	"github.com/kumy/https-echo-server/internal/metrics"
+	"github.com/kumy/https-echo-server/internal/verbose"
 )
 
 // Shaping parameter names (spec §6.3).

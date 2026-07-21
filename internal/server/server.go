@@ -16,11 +16,11 @@ import (
 	"golang.org/x/net/http2"
 	"golang.org/x/net/http2/h2c"
 
-	"github.com/kumy/http-echo-server/internal/config"
-	"github.com/kumy/http-echo-server/internal/forward"
-	"github.com/kumy/http-echo-server/internal/metrics"
-	"github.com/kumy/http-echo-server/internal/tlsmgr"
-	"github.com/kumy/http-echo-server/internal/verbose"
+	"github.com/kumy/https-echo-server/internal/config"
+	"github.com/kumy/https-echo-server/internal/forward"
+	"github.com/kumy/https-echo-server/internal/metrics"
+	"github.com/kumy/https-echo-server/internal/tlsmgr"
+	"github.com/kumy/https-echo-server/internal/verbose"
 )
 
 // Server runs the plaintext and TLS listeners.

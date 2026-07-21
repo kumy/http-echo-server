@@ -1,23 +1,23 @@
 version: 2
 
-project_name: http-echo-server
+project_name: https-echo-server
 
 before:
   hooks:
     - go mod tidy
 
 builds:
-  - id: http-echo-server
-    main: ./cmd/http-echo-server
+  - id: https-echo-server
+    main: ./cmd/https-echo-server
     env:
       - CGO_ENABLED=0
     flags:
       - -trimpath
     ldflags:
       - -s -w
-      - -X github.com/kumy/http-echo-server/internal/version.Version={{ .Version }}
-      - -X github.com/kumy/http-echo-server/internal/version.Commit={{ .ShortCommit }}
-      - -X github.com/kumy/http-echo-server/internal/version.Date={{ .Date }}
+      - -X github.com/kumy/https-echo-server/internal/version.Version={{ .Version }}
+      - -X github.com/kumy/https-echo-server/internal/version.Commit={{ .ShortCommit }}
+      - -X github.com/kumy/https-echo-server/internal/version.Date={{ .Date }}
     goos:
       - linux
       - darwin
@@ -54,7 +54,7 @@ dockers:
     goarch: amd64
     dockerfile: Dockerfile.goreleaser
     image_templates:
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-amd64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-amd64
     build_flag_templates:
       - --platform=linux/amd64
       - --label=org.opencontainers.image.version={{ .Version }}
@@ -66,7 +66,7 @@ dockers:
     goarch: arm64
     dockerfile: Dockerfile.goreleaser
     image_templates:
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-arm64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-arm64
     build_flag_templates:
       - --platform=linux/arm64
       - --label=org.opencontainers.image.version={{ .Version }}
@@ -74,19 +74,19 @@ dockers:
       - --label=org.opencontainers.image.created={{ .Date }}
 
 docker_manifests:
-  - name_template: ghcr.io/kumy/http-echo-server:{{ .Version }}
+  - name_template: ghcr.io/kumy/https-echo-server:{{ .Version }}
     image_templates:
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-amd64
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-arm64
-  - name_template: ghcr.io/kumy/http-echo-server:{{ .Major }}.{{ .Minor }}
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-amd64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-arm64
+  - name_template: ghcr.io/kumy/https-echo-server:{{ .Major }}.{{ .Minor }}
     image_templates:
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-amd64
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-arm64
-  - name_template: ghcr.io/kumy/http-echo-server:{{ .Major }}
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-amd64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-arm64
+  - name_template: ghcr.io/kumy/https-echo-server:{{ .Major }}
     image_templates:
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-amd64
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-arm64
-  - name_template: ghcr.io/kumy/http-echo-server:latest
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-amd64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-arm64
+  - name_template: ghcr.io/kumy/https-echo-server:latest
     image_templates:
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-amd64
-      - ghcr.io/kumy/http-echo-server:{{ .Version }}-arm64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-amd64
+      - ghcr.io/kumy/https-echo-server:{{ .Version }}-arm64

@@ -119,7 +119,7 @@ func EnvName(flag string) string {
 }
 
 func newFlagSet() *pflag.FlagSet {
-	fs := pflag.NewFlagSet("http-echo-server", pflag.ContinueOnError)
+	fs := pflag.NewFlagSet("https-echo-server", pflag.ContinueOnError)
 	fs.SortFlags = false
 
 	fs.Bool("http-enabled", true, "enable the plaintext listener")

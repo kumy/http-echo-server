@@ -15,8 +15,8 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/kumy/http-echo-server/internal/config"
-	"github.com/kumy/http-echo-server/internal/tlsmgr/autoca"
+	"github.com/kumy/https-echo-server/internal/config"
+	"github.com/kumy/https-echo-server/internal/tlsmgr/autoca"
 )
 
 func baseConfig(t *testing.T) *config.Config {

@@ -2,12 +2,12 @@
 # copied in. For standalone builds use ./Dockerfile (multi-stage).
 FROM gcr.io/distroless/static-debian12:nonroot
 
-LABEL org.opencontainers.image.title="http-echo-server" \
+LABEL org.opencontainers.image.title="https-echo-server" \
       org.opencontainers.image.description="Echo HTTP/HTTPS request properties back to the client, with HTTP/2 and on-the-fly TLS" \
-      org.opencontainers.image.source="https://github.com/kumy/http-echo-server" \
+      org.opencontainers.image.source="https://github.com/kumy/https-echo-server" \
       org.opencontainers.image.licenses="MIT"
 
-COPY http-echo-server /usr/local/bin/http-echo-server
+COPY https-echo-server /usr/local/bin/https-echo-server
 
 VOLUME ["/certs"]
 ENV TLS_CA_CERT_FILE=/certs/ca.crt \
@@ -17,4 +17,4 @@ EXPOSE 8080 8443
 
 USER nonroot
 
-ENTRYPOINT ["/usr/local/bin/http-echo-server"]
+ENTRYPOINT ["/usr/local/bin/https-echo-server"]

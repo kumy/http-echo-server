@@ -30,4 +30,4 @@ formatters:
   settings:
     goimports:
       local-prefixes:
-        - github.com/kumy/http-echo-server
+        - github.com/kumy/https-echo-server

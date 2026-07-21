@@ -128,7 +128,7 @@ before being relayed back** to the original client — status, headers, and
 body all pass through unchanged.
 
 ```shell
-FORWARD_URL=http://backend:9093 VERBOSE=true LOG_FORMAT=console http-echo-server
+FORWARD_URL=http://backend:9093 VERBOSE=true LOG_FORMAT=console https-echo-server
 # point the client that normally talks to backend:9093 at this daemon instead
 ```
 
@@ -184,7 +184,7 @@ interleave. Bodies longer than `MAX_BODY_SIZE` are truncated with a
 ## JWT decoding
 
 ```shell
-JWT_HEADER=Authorization http-echo-server
+JWT_HEADER=Authorization https-echo-server
 curl -H "Authorization: Bearer eyJhbGciOi..." http://localhost:8080/
 ```
 
@@ -194,7 +194,7 @@ payload are base64-decoded and echoed; the signature is not verified.
 ## CORS
 
 ```shell
-CORS_ALLOW_ORIGIN='*' http-echo-server
+CORS_ALLOW_ORIGIN='*' https-echo-server
 ```
 
 With any `CORS_ALLOW_*` configured, preflight `OPTIONS` requests are answered
@@ -217,7 +217,7 @@ hello
 ## Prometheus metrics
 
 ```shell
-PROMETHEUS_ENABLED=true http-echo-server
+PROMETHEUS_ENABLED=true https-echo-server
 curl http://localhost:8080/metrics
 ```
 
@@ -234,5 +234,5 @@ cardinality). `PROMETHEUS_METRIC_TYPE` selects `summary` (default) or
 - Request logs include the full echo object under the `request` key.
 
 ```shell
-LOG_IGNORE_PATH='^/(healthz|metrics)' http-echo-server
+LOG_IGNORE_PATH='^/(healthz|metrics)' https-echo-server
 ```

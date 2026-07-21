@@ -22,7 +22,7 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/net/http2"
 
-	"github.com/kumy/http-echo-server/internal/config"
+	"github.com/kumy/https-echo-server/internal/config"
 )
 
 // startServer builds and starts a Server on ephemeral ports.

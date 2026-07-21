@@ -1,7 +1,7 @@
-// Command http-echo-server echoes HTTP request properties back to the
+// Command https-echo-server echoes HTTP request properties back to the
 // client — in the response body and in the logs — and can optionally
 // forward requests to a remote server while dumping both legs of the
-// exchange. See https://kumy.github.io/http-echo-server/.
+// exchange. See https://kumy.github.io/https-echo-server/.
 package main
 
 import (
@@ -15,10 +15,10 @@ import (
 	"github.com/spf13/pflag"
 	"go.uber.org/zap"
 
-	"github.com/kumy/http-echo-server/internal/config"
-	"github.com/kumy/http-echo-server/internal/logging"
-	"github.com/kumy/http-echo-server/internal/server"
-	"github.com/kumy/http-echo-server/internal/version"
+	"github.com/kumy/https-echo-server/internal/config"
+	"github.com/kumy/https-echo-server/internal/logging"
+	"github.com/kumy/https-echo-server/internal/server"
+	"github.com/kumy/https-echo-server/internal/version"
 )
 
 // Exit codes (docs/specification.md §12).
@@ -42,7 +42,7 @@ func run(args []string) int {
 		return exitConfig
 	}
 	if cfg.ShowVersion {
-		fmt.Println("http-echo-server " + version.String())
+		fmt.Println("https-echo-server " + version.String())
 		return exitOK
 	}
 
@@ -53,7 +53,7 @@ func run(args []string) int {
 	}
 	defer func() { _ = logger.Sync() }()
 
-	logger.Info("starting http-echo-server",
+	logger.Info("starting https-echo-server",
 		zap.String("version", version.Version),
 		zap.String("commit", version.Commit),
 		zap.String("built", version.Date),

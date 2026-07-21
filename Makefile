@@ -1,7 +1,7 @@
-MODULE   := github.com/kumy/http-echo-server
-BINARY   := http-echo-server
+MODULE   := github.com/kumy/https-echo-server
+BINARY   := https-echo-server
 BIN_DIR  := bin
-IMAGE    := ghcr.io/kumy/http-echo-server
+IMAGE    := ghcr.io/kumy/https-echo-server
 
 VERSION  ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo dev)
 COMMIT   ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo none)

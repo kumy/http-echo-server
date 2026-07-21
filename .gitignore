@@ -1,7 +1,7 @@
 # Binaries
 /bin/
 /dist/
-/http-echo-server
+/https-echo-server
 *.exe
 
 # Test & coverage

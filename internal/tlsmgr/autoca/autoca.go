@@ -21,7 +21,7 @@ import (
 )
 
 // caCommonName is the CN of generated root CAs.
-const caCommonName = "http-echo-server Root CA"
+const caCommonName = "https-echo-server Root CA"
 
 // caValidity is the validity of generated root CAs.
 const caValidity = 10 * 365 * 24 * time.Hour
